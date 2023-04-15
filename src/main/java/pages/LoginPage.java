@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -15,13 +16,13 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id="Email")
+    @FindBy(id = "Email")
     private WebElement emailTxt;
 
-    @FindBy(id="Password")
+    @FindBy(id = "Password")
     private WebElement passwordTxt;
 
-//    @FindBy(className="btn btn-success submit btn-block")
+    //    @FindBy(className="btn btn-success submit btn-block")
     @FindBy(css = "button[type=submit]")
     private WebElement loginBtn;
 
@@ -31,31 +32,40 @@ public class LoginPage {
     @FindBy(css = "p > a[href=\"/Account/Register?returnurl=%2F\"]")
     private WebElement registerBtn;
 
-    public LoginPage typeEmail(String email){
+    public LoginPage typeEmail(String email) {
         emailTxt.clear();
         emailTxt.sendKeys(email);
         return this;
     }
 
-    public LoginPage typePassword (String password){
+    public LoginPage typePassword(String password) {
         passwordTxt.clear();
         passwordTxt.sendKeys(password);
         return this;
     }
 
-    public HomePage submitLogin(){
+    public HomePage submitLogin() {
         loginBtn.click();
         return new HomePage(driver);
     }
 
-    public LoginPage submitLoginWithFailure(){
+    public LoginPage submitLoginWithFailure() {
         loginBtn.click();
         return this;
     }
 
-    public CreateAccountPage goToRegisterPage(){
+    public CreateAccountPage goToRegisterPage() {
         registerBtn.click();
         return new CreateAccountPage(driver);
+    }
+
+    public LoginPage assertErrorIncorrectEmail() {
+        Assert.assertFalse(loginErrors.isEmpty());
+        for (int i = 0; i < loginErrors.size(); i++) {
+            String errorMessage = loginErrors.get(0).getText();
+            Assert.assertTrue(errorMessage.contains("is not"));
+        }
+        return this;
     }
 
 

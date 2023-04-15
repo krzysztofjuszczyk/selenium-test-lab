@@ -9,8 +9,8 @@ import pages.LoginPage;
 import javax.xml.crypto.Data;
 import java.time.Duration;
 
-public class Lab_10_Test_Niepoprawnego_Logowania_Email_DataSource_Test  {
-    private WebDriver driver;
+public class Lab_10_Test_Niepoprawnego_Logowania_Email_DataSource_Test extends SeleniumBaseTest {
+//    private WebDriver driver;
 
     @DataProvider (name = "incorrectEmails")
     public Object[][] getWrongEmails(){
@@ -23,27 +23,28 @@ public class Lab_10_Test_Niepoprawnego_Logowania_Email_DataSource_Test  {
 
     @Test(dataProvider = "incorrectEmails")
     public void incorrectEmailTest(String incorrectEmails){
-        System.setProperty("webdriver.chrome.driver",
-                "c:/dev/driver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get("http://localhost:4444/");
+//        System.setProperty("webdriver.chrome.driver",
+//                "c:/dev/driver/chromedriver.exe");
+//        WebDriver driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().window().maximize();
+//        driver.get("http://localhost:4444/");
 
-        LoginPage page = new LoginPage(driver);
-        page.typeEmail(incorrectEmails);
-        page.typePassword("abc");
-        page.submitLoginWithFailure();
+        new LoginPage(driver)
+                .typeEmail(incorrectEmails)
+                .typePassword("abc")
+                .submitLoginWithFailure()
+                .assertErrorIncorrectEmail();
 
-        boolean hasError = false;
-        for (WebElement e :
-                page.loginErrors) {
-            if (e.getText().equals("The Email field is not a valid e-mail address."));{
-                hasError = true;
-                break;
-            }
-        }
-        Assert.assertTrue(hasError);
+//        boolean hasError = false;
+//        for (WebElement e :
+//                page.loginErrors) {
+//            if (e.getText().equals("The Email field is not a valid e-mail address."));{
+//                hasError = true;
+//                break;
+//            }
+//        }
+//        Assert.assertTrue(hasError);
 
     }
 }

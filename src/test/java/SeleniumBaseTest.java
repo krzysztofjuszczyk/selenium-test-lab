@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
@@ -11,9 +12,14 @@ public class SeleniumBaseTest {
     public void baseBeforeMethod(){
         System.setProperty("webdriver.chrome.driver",
                 "c:/dev/driver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get("http://localhost:4444/");
+    }
+
+    @AfterMethod
+    public void baseAfterMethod(){
+//        driver.quit();
     }
 }

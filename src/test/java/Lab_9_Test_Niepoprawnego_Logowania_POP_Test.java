@@ -6,27 +6,26 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
-public class Lab_9_Test_Niepoprawnego_Logowania_POP_Test {
+public class Lab_9_Test_Niepoprawnego_Logowania_POP_Test extends SeleniumBaseTest{
     @Test
     public void incorrectLoginTest(){
-        System.setProperty("webdriver.chrome.driver",
-                "c:/dev/driver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get("http://localhost:4444/");
+//        System.setProperty("webdriver.chrome.driver",
+//                "c:/dev/driver/chromedriver.exe");
+//        WebDriver driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().window().maximize();
+//        driver.get("http://localhost:4444/");
 
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.typeEmail("asdf");
-        loginPage.typePassword("asd");
-        loginPage.submitLoginWithFailure();
+//        LoginPage loginPage = new LoginPage(driver);
+//        loginPage.typeEmail("asdf");
+//        loginPage.typePassword("asd");
+//        loginPage.submitLoginWithFailure();
 
-        Assert.assertFalse(loginPage.loginErrors.isEmpty());
-        for (int i = 0; i < loginPage.loginErrors.size(); i++) {
-            String errorMessage = loginPage.loginErrors.get(0).getText();
-            Assert.assertTrue(errorMessage.contains("is not"));
-        }
-
+        new LoginPage(driver)
+                .typeEmail("asdf")
+                .typePassword("asdf")
+                .submitLoginWithFailure()
+                .assertErrorIncorrectEmail();
 
     }
 }

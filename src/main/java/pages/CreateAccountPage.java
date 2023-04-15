@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -50,4 +51,17 @@ public class CreateAccountPage {
         return this;
     }
 
+    public CreateAccountPage assertErrorIncorrectEmail(){
+        boolean hasError = false;
+        for (WebElement e :
+                loginErrors) {
+            if (e.getText().equals("The Email field is not a valid e-mail address."));{
+                hasError = true;
+                break;
+            }
+        }
+        Assert.assertTrue(hasError);
+        return this;
+
+    }
 }
