@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 public class CreateProcessPage extends HomePage{
     public CreateProcessPage(WebDriver driver) {
@@ -25,6 +26,9 @@ public class CreateProcessPage extends HomePage{
 
     @FindBy(css = "input[type=submit]")
     private WebElement createBtn;
+
+    @FindBy (css= ".text-danger.field-validation-error")
+    private WebElement errorField;
 
     public CreateProcessPage typeName(String name)  {
         processNameTxt.clear();
@@ -49,4 +53,19 @@ public class CreateProcessPage extends HomePage{
         return new ProcessesPage(driver);
     }
 
+    public CreateProcessPage createProcessWithFailure() {
+        createBtn.click();
+        return this;
+    }
+
+    public CreateProcessPage assertProcessNameError(String expErrorMessage) {
+        Assert.assertEquals(errorField.getText(), expErrorMessage);
+        return this;
+    }
+
+
+    public ProcessesPage backToList() {
+        backToListBtn.click();
+        return new ProcessesPage(driver);
+    }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import java.util.List;
 import java.util.UUID;
 
 public class ProcessesPage extends HomePage{
@@ -69,7 +70,14 @@ public class ProcessesPage extends HomePage{
         Assert.assertEquals(actNotes,expNotes);
 
         return this;
+    }
 
+    public ProcessesPage assertProcessIsNotShown(String processName) {
+        String processXpath = String.format(GENERIC_PROCESS_ROW_XPATH,processName);
+        List<WebElement> processesWithGivenName = driver.findElements(By.xpath(processXpath));
+        Assert.assertEquals(processesWithGivenName.size(),0);
+        //dopisac
+        return this;
     }
 
 }
