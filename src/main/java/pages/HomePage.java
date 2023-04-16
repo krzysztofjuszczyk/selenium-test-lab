@@ -38,7 +38,7 @@ public class HomePage {
 
 //    @FindBy(css = "#sidebar-menu > div > ul > li.active > ul > li > a")
 //    @FindBy(xpath = "//[text()[contains('Dashboard')]]")
-    @FindBy(className = "current-page")
+    @FindBy(linkText = "Dashboard")
     private WebElement dashboardsMenu;
 
     public HomePage assertWelcomeElementIsShown(){
@@ -87,4 +87,7 @@ public class HomePage {
         WebElement parent = menuLink.findElement(By.xpath("./.."));
         return parent.getAttribute("class").contains("active");
     }
+
+
+
 }
