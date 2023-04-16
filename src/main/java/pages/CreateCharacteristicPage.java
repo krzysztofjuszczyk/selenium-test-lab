@@ -1,9 +1,11 @@
 package pages;
 
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 public class CreateCharacteristicPage extends HomePage{
     public CreateCharacteristicPage(WebDriver driver) {
@@ -66,6 +68,19 @@ public class CreateCharacteristicPage extends HomePage{
         return new CharacteristicsPage(driver);
     }
 
+    public CreateCharacteristicPage submitCreateWithFailure(){
+        createBtn.click();
+        return new CreateCharacteristicPage(driver);
+    }
+
+    public CreateCharacteristicPage assertProcessError(String expErrorMessage){
+        Assert.assertEquals(errorField.getText(), expErrorMessage);
+        return this;
+    }
 
 
+    public CharacteristicsPage backToList() {
+        backToListBtn.click();
+        return new CharacteristicsPage(driver);
+    }
 }

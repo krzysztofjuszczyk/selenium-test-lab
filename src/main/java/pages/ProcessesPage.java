@@ -76,7 +76,6 @@ public class ProcessesPage extends HomePage{
         String processXpath = String.format(GENERIC_PROCESS_ROW_XPATH,processName);
         List<WebElement> processesWithGivenName = driver.findElements(By.xpath(processXpath));
         Assert.assertEquals(processesWithGivenName.size(),0);
-        //dopisac
         return this;
     }
 

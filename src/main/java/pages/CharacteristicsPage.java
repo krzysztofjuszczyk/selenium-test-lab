@@ -6,9 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import java.util.List;
+
 public class CharacteristicsPage extends HomePage {
 //    protected WebDriver driver;
     private String GENERIC_CHARACTERISTIC_ROW_XPATH = "//td[text()='%s']/..";
+    private String GENERIC_CHARACTERISTIC_RESULTS_XPATH = "//td[text()='%s']/..//a[contains(@href,'Results')]";
+    private String GENERIC_CHARACTERISTIC_REPORT_XPATH = "//td[text()='%s']/..//a[contains(@href,'Report')]";
 
     @FindBy(css = ".page-title h3")
     private WebElement characteristicsElm;
@@ -37,22 +41,38 @@ public class CharacteristicsPage extends HomePage {
         return this;
     }
 
-    public CharacteristicsPage addNewCharacteristic(String process, String name, String lsl, String usl, String binCount) {
-            goToCreateCharacteristicPage()
-                    .selectProcess(process)
-                .typeName(name)
-                    .typeLsl(lsl)
-                    .typeUsl(usl)
-//                    .typeBinCount(binCount)
-                .submitCreateCharacteristic();
+//    public CharacteristicsPage addNewCharacteristic(String process, String name, String lsl, String usl, String binCount) {
+//            clickAddCharacteristic()
+//                    .selectProcess(process)
+//                .typeName(name)
+//                    .typeLsl(lsl)
+//                    .typeUsl(usl)
+////                    .typeBinCount(binCount)
+//                .submitCreateCharacteristic();
+//
+//        return this;
+//    }
 
-        return this;
-    }
-
-    public CreateCharacteristicPage goToCreateCharacteristicPage(){
+    public CreateCharacteristicPage clickAddCharacteristic(){
         addNewCharacteristicBtn.click();
         return new CreateCharacteristicPage(driver);
     }
+
+    public ResultsPage clickResultsPage(String name){
+        String resultsBtnXpath = String.format(GENERIC_CHARACTERISTIC_RESULTS_XPATH, name);
+        WebElement resultsButton = driver.findElement(By.xpath(resultsBtnXpath));
+        resultsButton.click();
+        return new ResultsPage(driver);
+    }
+
+    public ReportPage clickReportPage (String name){
+        String reportBtnXpath = String.format(GENERIC_CHARACTERISTIC_REPORT_XPATH,name);
+        WebElement reportButton = driver.findElement(By.xpath(reportBtnXpath));
+        reportButton.click();
+        return new ReportPage(driver);
+    }
+
+
 
     public CharacteristicsPage assertCharacteristic (String expName, String expLsl, String expUsl, String expBinCount ) {
         String characteristicXpath = String.format(GENERIC_CHARACTERISTIC_ROW_XPATH,expName);
@@ -66,6 +86,13 @@ public class CharacteristicsPage extends HomePage {
         Assert.assertEquals(actUsl, expUsl);
         Assert.assertEquals(actBinCount, expBinCount);
 
+        return this;
+    }
+
+    public CharacteristicsPage assertCharacteristicIsNotShown(String characteristicName){
+        String characteristicXpath = String.format(GENERIC_CHARACTERISTIC_ROW_XPATH,characteristicName);
+        List<WebElement> processesWithGivenName = driver.findElements(By.xpath(characteristicXpath));
+        Assert.assertEquals(processesWithGivenName.size(),0);
         return this;
     }
 

@@ -19,7 +19,13 @@ public class Lab_18_Test_Tworzenia_Charakterystyki_Test extends SeleniumBaseTest
                 .typePassword(config.getPassword())
                 .submitLogin()
                 .goToCharacteristics()
-                .addNewCharacteristic(processName, characteristicName, lsl, usl, binCount)
+                .clickAddCharacteristic()
+                .selectProcess(processName)
+                .typeName(characteristicName)
+                .typeLsl(lsl)
+                .typeUsl(usl)
+                .submitCreateCharacteristic()
+//                .addNewCharacteristic(processName, characteristicName, lsl, usl, binCount)
                 .assertCharacteristic(characteristicName, lsl, usl, binCount);
 
 
