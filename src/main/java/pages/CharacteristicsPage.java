@@ -1,16 +1,20 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 public class CharacteristicsPage extends HomePage {
 //    protected WebDriver driver;
+    private String GENERIC_CHARACTERISTIC_ROW_XPATH = "//td[text()='%s']/..";
 
     @FindBy(css = ".page-title h3")
     private WebElement characteristicsElm;
+
+    @FindBy(linkText = "Add new characteristic")
+    private WebElement addNewCharacteristicBtn;
 
     public CharacteristicsPage(WebDriver driver) {
         super(driver);
@@ -32,4 +36,37 @@ public class CharacteristicsPage extends HomePage {
         Assert.assertEquals(driver.getCurrentUrl(), pageUrl);
         return this;
     }
+
+    public CharacteristicsPage addNewCharacteristic(String process, String name, String lsl, String usl, String binCount) {
+            goToCreateCharacteristicPage()
+                    .selectProcess(process)
+                .typeName(name)
+                    .typeLsl(lsl)
+                    .typeUsl(usl)
+//                    .typeBinCount(binCount)
+                .submitCreateCharacteristic();
+
+        return this;
+    }
+
+    public CreateCharacteristicPage goToCreateCharacteristicPage(){
+        addNewCharacteristicBtn.click();
+        return new CreateCharacteristicPage(driver);
+    }
+
+    public CharacteristicsPage assertCharacteristic (String expName, String expLsl, String expUsl, String expBinCount ) {
+        String characteristicXpath = String.format(GENERIC_CHARACTERISTIC_ROW_XPATH,expName);
+        WebElement characteristicRow = driver.findElement(By.xpath(characteristicXpath));
+
+        String actLsl = characteristicRow.findElement(By.xpath("./td[3]")).getText();
+        String actUsl =  characteristicRow.findElement(By.xpath("./td[4]")).getText();
+        String actBinCount =  characteristicRow.findElement(By.xpath("./td[5]")).getText();
+
+        Assert.assertEquals(actLsl, expLsl);
+        Assert.assertEquals(actUsl, expUsl);
+        Assert.assertEquals(actBinCount, expBinCount);
+
+        return this;
+    }
+
 }
