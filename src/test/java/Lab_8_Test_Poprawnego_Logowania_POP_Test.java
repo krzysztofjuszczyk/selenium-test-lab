@@ -1,11 +1,6 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
+import config.Config;
 import org.testng.annotations.Test;
-import pages.HomePage;
 import pages.LoginPage;
-
-import java.time.Duration;
 
 public class Lab_8_Test_Poprawnego_Logowania_POP_Test extends SeleniumBaseTest{
 
@@ -20,8 +15,10 @@ public class Lab_8_Test_Poprawnego_Logowania_POP_Test extends SeleniumBaseTest{
 //        homePage.assertWelcomeElementIsShown();
 
         new LoginPage(driver)
-                .typeEmail("test@test.com")
-                .typePassword("Test1!")
+//                .typeEmail("test@test.com")
+                .typeEmail(new Config().getUsername())
+//                .typePassword("Test1!")
+                .typePassword(new Config().getPassword())
                 .submitLogin()
                 .assertWelcomeElementIsShown();
 
