@@ -19,13 +19,13 @@ public class Lab_2_WebDriver {
         WebElement agreeBtn = driver.findElement(By.cssSelector("#L2AGLb"));
         agreeBtn.click();
         WebElement searchTxt = driver.findElement(By.cssSelector("textarea[name=q]"));
-        searchTxt.sendKeys("Quality Assurance" + Keys.ENTER);
+        searchTxt.sendKeys("Quality Assurance" ); //+ Keys.ENTER
 
 
 
-//        WebElement searchBtn = driver.findElement(By.cssSelector(".FPdoLc  input.gNO89b"));
-        WebElement searchBtn = driver.findElement(By.cssSelector("input.gNO89b"));
-//        searchBtn.click();
+//        WebElement searchBtn = driver.findElement(By.cssSelector("input.gNO89b"));
+        WebElement searchBtn = driver.findElement(By.cssSelector("input[value='Szukaj w Google'"));
+        searchBtn.click();
 
         driver.quit();
     }
