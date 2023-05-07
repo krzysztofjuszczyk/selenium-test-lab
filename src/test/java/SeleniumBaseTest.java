@@ -30,6 +30,7 @@ public class SeleniumBaseTest {
         System.setProperty("webdriver.chrome.driver",
                 "c:/Tools/drivers/chromedriver.exe"); //jenkins add
         String url = System.getProperty("applicationUrl");
+        System.out.println("retrieved system property: " + url);
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
