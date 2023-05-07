@@ -24,11 +24,13 @@ public class SeleniumBaseTest {
     @BeforeMethod
     public void baseBeforeMethod() {
         System.setProperty("webdriver.chrome.driver",
-                "c:/dev/driver/chromedriver.exe");
+                "c:/Tools/drivers/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get("http://localhost:4444/");
+        driver.get("http://127.0.0.1:4444");
+//        driver.get("%applicationUrl%");
+//        driver.get("http://localhost:4444/");
         config = new Config();
     }
 
