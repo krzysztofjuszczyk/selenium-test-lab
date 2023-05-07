@@ -60,7 +60,7 @@ public class SeleniumBaseTest {
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
         File srcFile = scrShot.getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile, new File("c:\\tmp\\"+fileName+".png"));
+            FileUtils.copyFile(srcFile, new File(fileName+".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
