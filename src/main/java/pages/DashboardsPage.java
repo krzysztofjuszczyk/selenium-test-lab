@@ -22,7 +22,7 @@ public class DashboardsPage {
         Assert.assertTrue(dashboardsElm.isDisplayed(), "Processes element is not displayed");
         Assert.assertTrue(dashboardsElm.getText().contains(txt),
                 "Dashboards element text: "+ dashboardsElm.getText() + "doesn't contain word "+ txt);
-        assertDashboardUrl("http://localhost:4444/");
+        assertDashboardUrl("http://127.0.0.1:4444/");
         return this;
     }
 
