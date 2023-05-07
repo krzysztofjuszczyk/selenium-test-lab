@@ -32,7 +32,7 @@ public class ProcessesPage extends HomePage{
         Assert.assertTrue(processesElm.isDisplayed(), "Processes element is not displayed");
         Assert.assertTrue(processesElm.getText().contains(txt),
                 "Processes element text: "+ processesElm.getText() + "doesn't contain word "+ txt);
-//        assertProcessesUrl("http://localhost:4444/Projects");
+        assertProcessesUrl("http://127.0.0.1:4444/Projects");
 
         return this;
     }
