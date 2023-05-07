@@ -6,7 +6,7 @@ public class Lab_20_Test_Raportu_Test extends SeleniumBaseTest  {
     public void reportTest(){
         String processName = "DEMO PROJECT";
 //        String characteristicName = UUID.randomUUID().toString().substring(0,10);
-        String characteristicName = "DudaAndrzej";
+        String characteristicName = "DudaNaNartach";
         String lsl = "9";
         String expLsl = "9.0000";
         String usl = "1";
