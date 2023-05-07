@@ -72,7 +72,7 @@ public class CharacteristicsPage extends HomePage {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();", reportButton);
-        js.executeScript("window.scrollBy(0,250)");
+        js.executeScript("window.scrollBy(0,500)");
 
         reportButton.click();
         return new ReportPage(driver);
