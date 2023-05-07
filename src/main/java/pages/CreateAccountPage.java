@@ -29,6 +29,9 @@ public class CreateAccountPage {
     @FindBy(css = ".validation-summary-errors>ul>li")
     public List<WebElement> loginErrors;
 
+    @FindBy(id = "Email-error")
+    public WebElement emailError;
+
     public CreateAccountPage typeEmail(String email){
         emailTxt.clear();
         emailTxt.sendKeys(email);
@@ -59,6 +62,9 @@ public class CreateAccountPage {
                 hasError = true;
                 break;
             }
+        }
+        if (emailError.getText().contains("The Email field is not a valid e-mail address.")){
+            hasError=true;
         }
         Assert.assertTrue(hasError);
         return this;
