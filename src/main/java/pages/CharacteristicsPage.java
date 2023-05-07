@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -68,6 +69,9 @@ public class CharacteristicsPage extends HomePage {
     public ReportPage clickReportPage (String name){
         String reportBtnXpath = String.format(GENERIC_CHARACTERISTIC_REPORT_XPATH,name);
         WebElement reportButton = driver.findElement(By.xpath(reportBtnXpath));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", reportButton);
         reportButton.click();
         return new ReportPage(driver);
     }
