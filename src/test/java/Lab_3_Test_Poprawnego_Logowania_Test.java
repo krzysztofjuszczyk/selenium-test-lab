@@ -5,23 +5,25 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 import java.time.Duration;
 
-public class Lab_3_Test_Poprawnego_Logowania_Test {
+public class Lab_3_Test_Poprawnego_Logowania_Test extends SeleniumBaseTest{
     @Test
     public void correctLoginTest(){
-        System.setProperty("webdriver.chrome.driver",
-                "c:/dev/driver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
 
-        //        driver.get("http://localhost:4444/");
-
-        // użycie pliku config.properties
-        driver.get(new Config().getApplicationUrl());
-
+//        System.setProperty("webdriver.chrome.driver",
+//                "c:/dev/driver/chromedriver.exe");
+//        WebDriver driver = new ChromeDriver();
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().window().maximize();
+//
+//        //        driver.get("http://localhost:4444/");
+//
+//        // użycie pliku config.properties
+//        driver.get(new Config().getApplicationUrl());
+        new LoginPage(driver);
         WebElement emailTxt = driver.findElement(By.cssSelector("input#Email"));
         emailTxt.sendKeys("test@test.com");
 

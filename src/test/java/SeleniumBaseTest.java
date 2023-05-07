@@ -34,9 +34,9 @@ public class SeleniumBaseTest {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-//        driver.get(url);
+        driver.get(url);
 //        driver.get("%applicationUrl%");
-        driver.get("http://localhost:4444/");
+//        driver.get("http://localhost:4444/");
         config = new Config();
 
         log.info("Tests run on environment" + System.getProperty("ENV"));

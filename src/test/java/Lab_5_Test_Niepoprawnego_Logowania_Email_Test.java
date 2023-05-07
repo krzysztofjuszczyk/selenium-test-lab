@@ -4,21 +4,22 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 import java.time.Duration;
 import java.util.List;
 
-public class Lab_5_Test_Niepoprawnego_Logowania_Email_Test {
+public class Lab_5_Test_Niepoprawnego_Logowania_Email_Test extends SeleniumBaseTest{
     @Test
     public void incorrectLoginTestWrongEmail (){
-        System.setProperty("webdriver.chrome.driver",
-                "c:/dev/driver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        driver.get("http://localhost:4444/");
-
+//        System.setProperty("webdriver.chrome.driver",
+//                "c:/dev/driver/chromedriver.exe");
+//        WebDriver driver = new ChromeDriver();
+//
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//        driver.manage().window().maximize();
+//        driver.get("http://localhost:4444/");
+        new LoginPage(driver);
         WebElement emailTxt = driver.findElement(By.cssSelector("#Email"));
         emailTxt.sendKeys("incorrect");
 

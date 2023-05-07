@@ -5,23 +5,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
 
 import java.time.Duration;
 
-public class Lab_6_Test_Niepoprawnego_Logowania_Haslo_Test {
+public class Lab_6_Test_Niepoprawnego_Logowania_Haslo_Test extends SeleniumBaseTest {
     @Test
     public void incorrectLoginTestWrongPassword  (){
-        System.setProperty("webdriver.chrome.driver",
-                "c:/dev/driver/chromedriver.exe");
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        WebDriver driver = new ChromeDriver(options);
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-        driver.manage().window().maximize();
-        driver.get("http://localhost:4444/");
-
+//        System.setProperty("webdriver.chrome.driver",
+//                "c:/dev/driver/chromedriver.exe");
+//
+//        ChromeOptions options = new ChromeOptions();
+//        options.addArguments("--remote-allow-origins=*");
+//        WebDriver driver = new ChromeDriver(options);
+//
+//        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+//        driver.manage().window().maximize();
+//        driver.get("http://localhost:4444/");
+        new LoginPage(driver);
         WebElement emailTxt = driver.findElement(By.cssSelector("#Email"));
         emailTxt.sendKeys("test@test.com");
 
