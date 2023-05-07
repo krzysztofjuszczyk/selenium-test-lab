@@ -62,7 +62,7 @@ public class LoginPage {
     public LoginPage assertErrorIncorrectEmail() {
         Assert.assertFalse(loginErrors.isEmpty());
         for (int i = 0; i < loginErrors.size(); i++) {
-            String errorMessage = loginErrors.get(0).getText();
+            String errorMessage = loginErrors.get(i).getText();
             Assert.assertTrue(errorMessage.contains("is not"));
         }
         return this;
